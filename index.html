@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<meta name="description" content="Free online Social Media Cover Resizer. Upload any image and instantly convert it to perfect YouTube, Facebook, X (Twitter), LinkedIn, Twitch, Pinterest &amp; Instagram sizes. Works on mobile, tablet, and desktop. No signup required." />
+<meta name="keywords" content="YouTube banner, Facebook cover, Twitter header, LinkedIn cover, Instagram post, resize image, social media cover maker" />
+<meta name="theme-color" content="#FF0000" />
+<meta property="og:title" content="Social Media Cover Resizer — YouTube, Facebook, X &amp; More" />
+<meta property="og:description" content="Resize any image to the perfect size for YouTube, Facebook, X, LinkedIn, Twitch, Pinterest &amp; Instagram. Fast, free, and private." />
+<meta property="og:type" content="website" />
+<title>Social Media Cover Resizer — YouTube, Facebook, X, LinkedIn &amp; More</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="style.css" /></head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">
+      <div class="logo-mark" aria-hidden="true"></div>
+      <span>Cover Resizer</span>
+    </div>
+    <div class="nav-right">
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#platforms">Platforms</a>
+        <a href="#upload">Upload</a>
+        <a href="#how">How it works</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Social Media <span class="accent">Cover Resizer</span></h1>
+  <p>Resize any image perfectly for <strong>YouTube, Facebook, X, LinkedIn, Twitch, Pinterest &amp; Instagram</strong>. Fast, free, and 100% private.</p>
+  <div class="badges">
+    <span class="badge">📱 Mobile friendly</span>
+    <span class="badge">⚡ 100% in-browser</span>
+    <span class="badge">🔒 No upload to server</span>
+    <span class="badge">✨ Free forever</span>
+    <span class="badge">🌓 Light &amp; dark mode</span>
+  </div>
+</section>
+
+<main class="container">
+
+  <!-- Platform selector -->
+  <section id="platforms" class="platforms-section" aria-label="Choose platform">
+    <h2>Choose your platform <span class="count" id="platformCount">8 sizes</span></h2>
+    <div class="platforms-grid" id="platformsGrid" role="tablist"></div>
+  </section>
+
+  <!-- Upload -->
+  <section id="upload" class="card upload-card" aria-label="Upload image">
+    <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Upload image by clicking or dropping">
+      <div class="dropzone-icon" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+      <h3>Drop your image here</h3>
+      <p>or tap the button below to choose a file</p>
+      <button type="button" class="btn btn-primary" id="uploadBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload Image
+      </button>
+      <div class="formats">Supported: JPG, JPEG, PNG, WebP · Max 25 MB</div>
+      <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" hidden="" />
+    </div>
+
+    <div class="info-bar" id="infoBar" aria-live="polite">
+      <div class="thumb" id="thumb" aria-hidden="true"></div>
+      <div class="info-text">
+        <div class="name" id="fileName">—</div>
+        <div class="meta" id="fileMeta">—</div>
+      </div>
+      <button class="btn btn-ghost" id="changeBtn" type="button">Change</button>
+    </div>
+  </section>
+
+  <!-- Editor -->
+  <section class="editor" id="editor" aria-label="Image editor">
+    <div class="editor-grid">
+
+      <div class="card preview-wrap">
+        <div class="preview-header">
+          <h3>Preview</h3>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <span class="current-platform" id="currentPlatformLabel">YouTube Banner</span>
+            <button class="btn btn-ghost" id="safeToggleBtn" type="button" title="Toggle safe area">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><rect x="3" y="3" width="18" height="18" rx="2"/><rect x="7" y="9" width="10" height="6" rx="1" stroke-dasharray="2 2"/></svg>
+              Safe area
+            </button>
+          </div>
+        </div>
+        <div class="preview-stage" id="previewStage">
+          <canvas id="previewCanvas" width="2560" height="1440" aria-label="Cover preview"></canvas>
+          <div class="safe-overlay" id="safeOverlay" aria-hidden="true">
+            <span class="safe-label" id="safeLabel">Safe area</span>
+          </div>
+        </div>
+        <div class="preview-footer">
+          <span>Output: <strong id="outputSizeLabel">2560 × 1440 px</strong></span>
+          <span id="zoomInfo">Zoom: 100%</span>
+        </div>
+      </div>
+
+      <aside class="card controls" aria-label="Editing controls">
+        <div>
+          <h3>Adjust</h3>
+          <p style="font-size:13px;color:var(--text-muted);margin-top:2px">Drag the preview to reposition</p>
+        </div>
+
+        <div class="control-group">
+          <label for="modeSeg">Fit mode</label>
+          <div class="seg" id="modeSeg" role="tablist">
+            <button type="button" data-mode="fill" class="active" role="tab" aria-selected="true">Fill</button>
+            <button type="button" data-mode="fit" role="tab" aria-selected="false">Fit</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label for="zoomRange">Zoom <span class="val" id="zoomVal">100%</span></label>
+          <input type="range" id="zoomRange" min="100" max="300" value="100" step="1" />
+        </div>
+
+        <div class="control-group">
+          <label for="blurRange">Background blur <span class="val" id="blurVal">0</span></label>
+          <input type="range" id="blurRange" min="0" max="40" value="0" step="1" />
+        </div>
+
+        <label class="toggle" id="blurBgToggle" tabindex="0" role="switch" aria-checked="false">
+          <span>Blur background (Fit mode)</span>
+          <span class="switch"></span>
+        </label>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="resetBtn" type="button">Reset</button>
+          <button class="btn btn-secondary" id="centerBtn" type="button">Center</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Download -->
+  <section class="card download-card" id="downloadCard" aria-label="Download">
+    <div class="download-inner">
+      <div>
+        <h3 id="downloadTitle">Your cover is ready 🎉</h3>
+        <p id="downloadSubtitle">Exported at exactly 2560 × 1440 pixels.</p>
+      </div>
+      <div class="download-actions">
+        <select class="format-select" id="formatSelect" aria-label="File format">
+          <option value="jpg">JPG (smaller)</option>
+          <option value="png">PNG (lossless)</option>
+        </select>
+        <button class="btn btn-primary" id="downloadBtn" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Cover
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Supported platforms list -->
+  <section class="supported">
+    <h2>All supported sizes</h2>
+    <p class="lead">One upload, every platform covered.</p>
+    <div class="platform-list" id="platformList"></div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how" id="how">
+    <h2>How it works</h2>
+    <p class="lead">Three simple steps to your perfect social media cover.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Pick a platform</h4>
+        <p>Choose YouTube, Facebook, X, LinkedIn, Twitch, Pinterest or Instagram — we'll set the exact dimensions automatically.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Upload &amp; adjust</h4>
+        <p>Drop any image, then zoom, drag, and position it perfectly. Toggle the safe-area overlay to keep text &amp; logos visible on all devices.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Download</h4>
+        <p>Export as JPG or PNG at the exact size required. Upload it directly to your profile or channel — no extra cropping needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy -->
+  <section class="privacy" id="privacy">
+    <div class="privacy-icon" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div>
+      <h4>Your images stay private</h4>
+      <p>Your images are processed locally in your browser and are not uploaded to our servers. No account required, no data collected. Everything happens on your device.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Made with <span class="heart">♥</span> for creators · © 2026 Social Media Cover Resizer · Not affiliated with YouTube, Meta, X, LinkedIn, Twitch, Pinterest or Instagram</p>
+</footer>
+
+<div class="sticky-download" id="stickyDownload">
+  <button class="btn btn-primary" id="stickyDownloadBtn" type="button">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download Cover
+  </button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+
+<script src="script.js"></script></body></html>
